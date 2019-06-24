@@ -3,9 +3,13 @@ service: serverless-nestjs
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: v1
+  region: cn-northwest-1
+  endpointType: regional
 
 plugins:
   - serverless-offline
+  - serverless-apigw-binary
 
 package:
   exclude:
@@ -14,6 +18,11 @@ package:
     - test/**
     - nodemon.json
     - README.md
+
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
 
 functions:
   index:
